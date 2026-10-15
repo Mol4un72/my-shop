@@ -3,11 +3,13 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from "next/navigation"
 import { UserRound, ShoppingCart, ShoppingBag, X } from 'lucide-react'
 
 export function Header() {
 
     const[isOpen, setIsOpen] = useState(false)
+    const pathname = usePathname()
     
     return (
         <>
@@ -23,9 +25,11 @@ export function Header() {
                 />
               </Link>
               <nav className="hidden md:flex absolute left-1/2 -translate-x-1/2">
-                <Link className='flex flex-row text-xl gap-1 mt-1' href="/products">
-                  Products<ShoppingBag size={20} className='mt-1' />
-                </Link>
+                {pathname !== '/products' && (
+                  <Link className='flex flex-row text-xl gap-1 mt-1' href="/products">
+                    Products<ShoppingBag size={20} className='mt-1' />
+                  </Link>
+                )}
               </nav>
 
               <div className="hidden md:flex flex items-center gap-6">
@@ -61,7 +65,7 @@ export function Header() {
           <nav 
             className={`fixed right-0 top-0 z-50 flex h-dvh w-72 flex-col bg-white p-8    shadow-xl transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "translate-x-full"}`}
           >
-            <button 
+            <button
               className='absolute text-3xl right-8 top-6'
               onClick={() => {setIsOpen(false)}}
             >
@@ -73,20 +77,20 @@ export function Header() {
                 href="/products"
                 onClick={() => setIsOpen(false)}
               >
-                  Products<ShoppingBag className='mt-2'/>
+                  Products<ShoppingBag className='mt-2.5'/>
               </Link>
               <Link
                 className='flex flex-row gap-1' 
                 href="/profile" 
                 onClick={() => setIsOpen(false)}
               >
-                Profile<UserRound className='mt-2'/>
+                Profile<UserRound className='mt-2.5'/>
               </Link>
               <Link 
                 className='flex flex-row gap-1'
                 href="/cart" 
                 onClick={() => setIsOpen(false)}>
-                  Cart<ShoppingCart className='mt-2'/>
+                  Cart<ShoppingCart className='mt-2.5'/>
               </Link>
             </div>
           </nav>
