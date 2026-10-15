@@ -1,1 +1,21 @@
 @import "tailwindcss";
+
+:root {
+  /* Основні */
+  --color-cyan: #00D4FF;
+  --color-blue: #1E5BFF;
+  --color-navy: #0A2540;
+
+  /* Фони */
+  --color-bg: #FFFFFF;
+  --color-surface: #F1F5F9;
+  --color-cyan-light: #EAFAFF;
+
+  /* Текст */
+  --color-text: #0A2540;
+  --color-text-muted: #5B6B7F;
+  --color-text-on-cyan: #062A4D;
+
+  /* Рамки */
+  --color-border: #D5DCE6;
+}
