@@ -14,16 +14,16 @@ export function ProductItem({ product }: {product: Product}) {
                     alt="Product Image"
                     width={200}
                     height={150}
-                    className='rounded-lg md:h-40 w-full'
+                    className='rounded-lg min-h-16 aspect-square md:min-h-30 w-full md:max-h-45 lg:max-h-55'
                 />
                 <div>
-                    <p>{product.name}</p>
+                    <p className='text-lg md:text-xl lg:text-2xl'>{product.name}</p>
                     <p className='text-[var(--color-text-muted)]'>{product.price}</p>
                 </div>
                 <div className='flex flex-row gap-1'>
                     <Button 
                         text="Buy"
-                        className='w-full min-h-8 md:min-h-10'
+                        className='w-full min-h-8 md:min-h-8'
                         icon={<ShoppingCart size={15} className='mt-1'/>}
                     />
                 </div>
