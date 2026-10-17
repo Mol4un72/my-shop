@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { X } from 'lucide-react'
+import { Button } from "../ui/button"
 
 export function Sidebar() {
 
@@ -20,14 +21,13 @@ export function Sidebar() {
     return(
         <>
             <div className="flex justify-center">
-                <button
-                    className="md:hidden text-2xl border rounded-lg h-10 px-10 my-6"
+                <Button
+                    text="filters"
+                    className="md:hidden bg-white/0 text-2xl border rounded-lg h-10 px-10"
                     onClick={() => {
                         setOpen(true)
                     }}
-                >
-                filters
-                </button>
+                />
             </div>
             <aside>
                 <div 

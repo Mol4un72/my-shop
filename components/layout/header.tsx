@@ -13,7 +13,7 @@ export function Header() {
     
     return (
         <>
-          <header className="relative flex w-full h-20 border-b border-[var(--color-border)] justify-between px-6 items-center">
+          <header className="fixed bg-white top-0 flex w-full h-20 border-b border-[var(--color-border)] justify-between px-6 items-center">
               <Link
                 href="/"
               >
@@ -50,6 +50,7 @@ export function Header() {
                 ☰
               </button>
           </header>
+          <div className='flex h-20'/>
 
           <div
             className={`fixed inset-0 z-40 bg-black/40 transition-opacity duration-300 ${
