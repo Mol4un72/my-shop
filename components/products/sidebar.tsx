@@ -34,7 +34,7 @@ export function Sidebar() {
                     className={`
                         ${open ? "fixed inset-0 z-50" : "hidden"}
                         bg-white p-6
-                        md:relative md:block md:w-55 md:border-r md:border-[var(--color-border)] md:p-4
+                        md:fixed md:block md:max-w-45 md:border-r md:border-[var(--color-border)] md:px-4 md:py-0
                     `}
                 >
                     <div className="flex justify-between text-3xl md:hidden">
@@ -57,11 +57,11 @@ export function Sidebar() {
                         
                         <h2 className="text-4xl md:text-2xl">Filters</h2>
                         
-                        <div className="flex flex-col text-3xl gap-4 md:text-xl">
+                        <div className="flex flex-col text-2xl gap-4 md:text-xl">
                             <div className="flex flex-col gap-1">
                                 <label>Category</label>
                                 <select 
-                                    className="border rounded-lg"
+                                    className="border border-[var(--color-border)] rounded-lg md:text-sm"
                                     value={filters.category1}
                                     onChange={(e) =>
                                       setFilters({ ...filters, category1: e.target.value })
@@ -77,7 +77,7 @@ export function Sidebar() {
                             <div className="flex flex-col gap-1">
                                 <label>Category</label>
                                 <select 
-                                    className="border rounded-lg"
+                                    className="border rounded-lg border-[var(--color-border)] md:text-sm"
                                     value={filters.category2}
                                     onChange={(e) =>
                                       setFilters({ ...filters, category2: e.target.value })
@@ -93,7 +93,7 @@ export function Sidebar() {
                             <div className="flex flex-col gap-1">
                                 <label>Category</label>
                                 <select 
-                                    className="border rounded-lg"
+                                    className="border rounded-lg border-[var(--color-border)] md:text-sm"
                                     value={filters.category3}
                                     onChange={(e) =>
                                       setFilters({ ...filters, category3: e.target.value })
@@ -108,8 +108,8 @@ export function Sidebar() {
                             <div className="flex flex-col gap-1">
                                 <label>Price</label>
                                 <div className="flex flex-row gap-3">
-                                    <input placeholder="from" className="w-full text-xl border rounded-md p-2 h-8" />
-                                    <input placeholder="to" className="w-full text-xl border rounded-md p-2 h-8" />
+                                    <input placeholder="from" className="w-full md:max-h-6 text-xl border rounded-md p-2 h-8 border-[var(--color-border)] md:text-sm" />
+                                    <input placeholder="to" className="w-full md:max-h-6 text-xl border rounded-md p-2 h-8 border-[var(--color-border)] md:text-sm" />
                                 </div>
                             </div>
                             <button
@@ -123,6 +123,7 @@ export function Sidebar() {
                         </div>
                     </div>
                 </div>
+                <div className="md:w-45" />
             </aside>
         </>
     )
