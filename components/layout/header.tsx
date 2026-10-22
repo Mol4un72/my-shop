@@ -13,7 +13,7 @@ export function Header() {
     
     return (
         <>
-          <header className="fixed bg-white top-0 flex w-full h-20 border-b border-[var(--color-border)] justify-between px-6 items-center">
+          <header className="fixed bg-white top-0 flex w-full h-20 border-b border-[var(--color-border)] justify-between px-6 items-center z-1000">
               <Link
                 href="/"
               >
