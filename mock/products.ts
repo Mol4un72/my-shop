@@ -5,60 +5,90 @@ export const products: Product[] = [
         id: "1",
         name: "Product 1",
         price: 19.99,
+        description: "This is a description for Product 1.",
+        producer: "Producer 1",
+        availability: "In Stock",
         imageUrl: "/test.jpg"
     },
     {
         id: "2",
         name: "Product 2",
         price: 29.99,
+        description: "This is a description for Product 2.",
+        producer: "Producer 2",
+        availability: "In Stock",
         imageUrl: "/test.jpg"
     },
     {
         id: "3",
         name: "Product 3",
         price: 39.99,
+        description: "This is a description for Product 3.",
+        producer: "Producer 3",
+        availability: "In Stock",
         imageUrl: "/test.jpg"
     },
     {
         id: "4",
         name: "Product 4",
         price: 49.99,
+        description: "This is a description for Product 4.",
+        producer: "Producer 4",
+        availability: "In Stock",
         imageUrl: "/test.jpg"
     },
     {
         id: "5",
         name: "Product 5",
         price: 59.99,
+        description: "This is a description for Product 5.",
+        producer: "Producer 5",
+        availability: "In Stock",
         imageUrl: "/test.jpg"
     },
     {
         id: "6",
         name: "Product 6",
         price: 69.99,
+        description: "This is a description for Product 6.",
+        producer: "Producer 6",
+        availability: "In Stock",
         imageUrl: "/test.jpg"
     },
     {
         id: "7",
         name: "Product 7",
         price: 79.99,
+        description: "This is a description for Product 7.",
+        producer: "Producer 7",
+        availability: "In Stock",
         imageUrl: "/test.jpg"
     },
     {
         id: "8",
         name: "Product 8",
         price: 89.99,
+        description: "This is a description for Product 8.",
+        producer: "Producer 8",
+        availability: "In Stock",
         imageUrl: "/test.jpg"
     },
     {
         id: "9",
         name: "Product 9",
         price: 99.99,
+        description: "This is a description for Product 9.",
+        producer: "Producer 9",
+        availability: "In Stock",
         imageUrl: "/test.jpg"
     },
     {
         id: "10",
         name: "Product 10",
         price: 109.99,
+        description: "This is a description for Product 10.",
+        producer: "Producer 10",
+        availability: "In Stock",
         imageUrl: "/test.jpg"
     }
 ]
