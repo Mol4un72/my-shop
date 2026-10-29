@@ -3,10 +3,9 @@ import Link from 'next/link'
 import { products } from '@/mock/products'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
-import { ArrowLeft, ShoppingCart } from "lucide-react";
-import { Button } from '@/components/ui/button'
-import { CountButton } from '@/components/ui/count-button'
+import { ArrowLeft } from "lucide-react";
 import { WeightChoose } from '@/components/products/weight-choose'
+import { ProductActions } from '@/components/products/[id]/product-actions'
 
 type Props = {
     params: Promise<{ id: string }>
@@ -28,7 +27,7 @@ async function ProductDetails({ params }: Props) {
     const product = products.find((product) => product.id === id)
 
     if (!product) {
-        notFound()
+        notFound()  
     }
 
     return (
@@ -82,14 +81,8 @@ async function ProductDetails({ params }: Props) {
                         <p className='text-[var(--color-text-muted)]'>{product.description}</p>
                     </div>
 
-                    <div className='flex flex-row gap-6'>
-                        <CountButton variant='product_item' className='min-w-25'/>
-                        <Button
-                            text="add to cart" 
-                            icon={<ShoppingCart size={18}/>}
-                            className='h-10 w-full text-xl'
-                        />
-                    </div>
+                    <ProductActions />
+                    
                 </div>
             </div>
         </section>
