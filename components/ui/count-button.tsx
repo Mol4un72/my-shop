@@ -1,40 +1,25 @@
-"use client"
-
-import { useState } from 'react'
-
 type Props = {
     className?: string,
-    variant: 'product_item' | 'cart_item'
+    onMinus?: () => void,
+    onPlus?: () => void,
+    value?: number,
 }
 
-export function CountButton(props: Props) {
-
-    const variants = {
-        product_item: 'gap-4 px-2',
-        cart_item: 'gap-2 px-2'
-    }
-
-    const[count, setCount]=useState(1)
-    const variant = props.variant ?? 'standart'
+export function CountButton({className, onMinus, onPlus, value}: Props) {
     
     return(
         <>
-            <div className={`flex flex-row rounded-lg border border-[var(--color-border)] items-center justify-center ${props.className} ${variants[variant]}`}>
+            <div className={`flex flex-row relative rounded-lg min-w-22 border border-[var(--color-border)] items-center justify-center ${className}`}>
                 <button
-                    onClick={() => {
-                        setCount((count) => {
-                            if (count == 1) return count
-                            else return count - 1
-                        })
-                    }}
+                    onClick={onMinus}
+                    className='absolute left-4'
                 >
                     -
                 </button>
-                {count}
+                {value}
                 <button
-                    onClick={() => {
-                        setCount(count => count + 1)
-                    }}
+                    onClick={onPlus}
+                    className='absolute right-4'
                 >
                     +
                 </button>

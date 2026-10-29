@@ -1,4 +1,15 @@
-import { Product } from "../types/product";
+export interface Product {
+    id: string;
+    name: string;
+    price: number | number[];
+    description?: string;
+    availability?: string;
+    producer?: string;
+    imageUrl: string;
+    category: 'cheese' | 'dairy';
+    species: string;
+    weight: number[];
+}
 
 export const products: Product[] = [
     {
@@ -8,7 +19,10 @@ export const products: Product[] = [
         description: "This is a description for Product 1.",
         producer: "Producer 1",
         availability: "In Stock",
-        imageUrl: "/test.jpg"
+        imageUrl: "/test.jpg",
+        category: 'cheese',
+        species: 'hard cheese',
+        weight: [100, 250, 1000],
     },
     {
         id: "2",
@@ -17,7 +31,10 @@ export const products: Product[] = [
         description: "This is a description for Product 2.",
         producer: "Producer 2",
         availability: "In Stock",
-        imageUrl: "/test.jpg"
+        imageUrl: "/test.jpg",
+        category: 'cheese',
+        species: 'soft cheese',
+        weight: [100, 250, 1000],
     },
     {
         id: "3",
@@ -26,7 +43,10 @@ export const products: Product[] = [
         description: "This is a description for Product 3.",
         producer: "Producer 3",
         availability: "In Stock",
-        imageUrl: "/test.jpg"
+        imageUrl: "/test.jpg",
+        category: 'cheese',
+        species: 'soft cheese',
+        weight: [100, 250, 1000],
     },
     {
         id: "4",
@@ -35,7 +55,10 @@ export const products: Product[] = [
         description: "This is a description for Product 4.",
         producer: "Producer 4",
         availability: "In Stock",
-        imageUrl: "/test.jpg"
+        imageUrl: "/test.jpg",
+        category: 'dairy',
+        species: 'milk',
+        weight: [100, 250, 1000],
     },
     {
         id: "5",
@@ -44,7 +67,10 @@ export const products: Product[] = [
         description: "This is a description for Product 5.",
         producer: "Producer 5",
         availability: "In Stock",
-        imageUrl: "/test.jpg"
+        imageUrl: "/test.jpg",
+        category: 'dairy',
+        species: 'kefir',
+        weight: [100, 250, 1000],
     },
     {
         id: "6",
@@ -53,7 +79,10 @@ export const products: Product[] = [
         description: "This is a description for Product 6.",
         producer: "Producer 6",
         availability: "In Stock",
-        imageUrl: "/test.jpg"
+        imageUrl: "/test.jpg",
+        category: 'cheese',
+        species: 'hard cheese',
+        weight: [100, 250, 1000],
     },
     {
         id: "7",
@@ -62,7 +91,10 @@ export const products: Product[] = [
         description: "This is a description for Product 7.",
         producer: "Producer 7",
         availability: "In Stock",
-        imageUrl: "/test.jpg"
+        imageUrl: "/test.jpg",
+        category: 'dairy',
+        species: 'milk',
+        weight: [100, 250, 1000],
     },
     {
         id: "8",
@@ -71,7 +103,10 @@ export const products: Product[] = [
         description: "This is a description for Product 8.",
         producer: "Producer 8",
         availability: "In Stock",
-        imageUrl: "/test.jpg"
+        imageUrl: "/test.jpg",
+        category: 'dairy',
+        species: 'ryazhenka',
+        weight: [100, 250, 1000],
     },
     {
         id: "9",
@@ -80,7 +115,10 @@ export const products: Product[] = [
         description: "This is a description for Product 9.",
         producer: "Producer 9",
         availability: "In Stock",
-        imageUrl: "/test.jpg"
+        imageUrl: "/test.jpg",
+        category: 'cheese',
+        species: 'hard cheese',
+        weight: [100, 250, 1000],
     },
     {
         id: "10",
@@ -89,6 +127,9 @@ export const products: Product[] = [
         description: "This is a description for Product 10.",
         producer: "Producer 10",
         availability: "In Stock",
-        imageUrl: "/test.jpg"
+        imageUrl: "/test.jpg",
+        category: 'cheese',
+        species: 'soft cheese',
+        weight: [100, 250, 1000],
     }
 ]

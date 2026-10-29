@@ -5,11 +5,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from "next/navigation"
 import { UserRound, ShoppingCart, ShoppingBag, X } from 'lucide-react'
+import { useCart } from '@/context/cart-context'
 
 export function Header() {
 
     const[isOpen, setIsOpen] = useState(false)
     const pathname = usePathname()
+
+    const { cart } = useCart()
     
     return (
         <>
@@ -34,7 +37,10 @@ export function Header() {
 
               <div className="hidden md:flex flex items-center gap-6">
                 <Link href="/cart">
-                  <ShoppingCart />
+                  <div className='relative p-3'>
+                    <ShoppingCart />
+                    <p className={`absolute top-1.5 right-0.5 flex justify-center items-center rounded-full size-3 text-[8px] ${cart.length == 0 ? 'bg-gray-500 text-white' : 'bg-[var(--color-cyan)]'}`}>{cart.length > 9 ? ('9+') : (cart.length)}</p>
+                  </div>
                 </Link>
 
                 <Link href="/profile">
