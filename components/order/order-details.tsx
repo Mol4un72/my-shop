@@ -3,8 +3,8 @@
 import { useOrder } from "@/context/order-context"
 import Link from "next/link"
 import { Button } from "../ui/button"
-import { OrderItem } from "./order-item"
 import { CartItem } from "../cart/cart-item"
+import { ArrowLeft } from "lucide-react"
 
 export function OrderDetails({orderID}: {orderID: string}) {
 
@@ -37,18 +37,22 @@ export function OrderDetails({orderID}: {orderID: string}) {
                         </div>
                     ) : (
                         <div className="flex flex-col gap-3">
-                            {orderItem?.items.map((item) => (
-                                <CartItem key={item.product.id} product={item.product} />
+                            {orderItem?.items.map((item, index) => (
+                                <CartItem
+                                    key={`${item.product.id}-${item.selectedWeight}-${index}`}
+                                    product={item.product}
+                                    quantity={item.quantity}
+                                    selectedWeight={item.selectedWeight}
+                                    price={item.totalPrice}
+                                    readOnly
+                                />
                             ))}
                         </div>
                     )}
                 </div>
-                <div className="flex flex-col gap-3">
-                    <Button className="h-10 text-lg" text="Update" />
-                    <Link href={`/orders`}>
-                        <Button className='h-10 text-lg' text="Cancel" variant="secondary" />
-                    </Link>
-                </div>
+                <Link className="flex flex-row justify-center" href={`/orders`}>
+                    <ArrowLeft />Back to orders
+                </Link>
             </div>
         </>
     )
