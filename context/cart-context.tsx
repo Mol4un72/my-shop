@@ -8,15 +8,11 @@ import {
 } from 'react'
 
 import type { Product } from '@/mock/products'
-
-type CartItem = {
-  product: Product
-  quantity: number
-}
+import type { ReadyToBuyProduct } from '@/components/products/product-item'
 
 type CartContextType = {
-  cart: CartItem[]
-  addToCart: (product: Product) => void
+  cart: ReadyToBuyProduct[]
+  addToCart: (item: ReadyToBuyProduct) => void
   removeFromCart: (id: Product['id']) => void
   updateQuantity: (id: Product['id'], quantity: number) => void
   clearCart: () => void
@@ -25,23 +21,28 @@ type CartContextType = {
 const CartContext = createContext<CartContextType | null>(null)
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [cart, setCart] = useState<CartItem[]>([])
+  const [cart, setCart] = useState<ReadyToBuyProduct[]>([])
 
-  function addToCart(product: Product) {
+  function addToCart(newItem: ReadyToBuyProduct) {
     setCart(prev => {
       const existing = prev.find(
-        item => item.product.id === product.id
+        item => 
+          item.product.id === newItem.product.id &&
+          item.selectedWeight === newItem.selectedWeight &&
+          item.totalPrice === newItem.totalPrice
       )
 
       if (existing) {
         return prev.map(item =>
-          item.product.id === product.id
+          item.product.id === newItem.product.id &&
+          item.selectedWeight === newItem.selectedWeight &&
+          item.totalPrice === newItem.totalPrice
             ? { ...item, quantity: item.quantity + 1 }
             : item
         )
       }
 
-      return [...prev, { product, quantity: 1 }]
+      return [...prev, newItem]
     })
   }
 

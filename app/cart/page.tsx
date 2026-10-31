@@ -2,7 +2,6 @@
 
 import { CartItem } from "@/components/cart/cart-item"
 import { Button } from "@/components/ui/button"
-import { products } from '@/mock/products'
 import { useCart } from '@/context/cart-context'
 import { useOrder } from "@/context/order-context"
 import Link from 'next/link'
@@ -11,7 +10,7 @@ export default function CartPage() {
 
     const { cart } = useCart()
     const { createOrder } = useOrder()
-    const total = cart.reduce((sum, item) => {return sum + item.product.price * item.quantity}, 0).toFixed(2)
+    const total = cart.reduce((sum, item) => {return sum += item.totalPrice * item.quantity}, 0).toFixed(2)
     
     return (
         <>
@@ -19,7 +18,7 @@ export default function CartPage() {
                 <div className="flex flex-col w-full">
                     <div className="flex justify-between md:hidden">
                         <h2 className="text-2xl">Cart</h2>
-                        <p className="mt-auto">{products.length} items</p>
+                        <p className="mt-auto">{cart.length} items</p>
                     </div>
                     {cart.length === 0 ? (
                         <div className="h-[400px] border rounded-lg border-[var(--color-border)] flex flex-col items-center justify-center gap-1 p-4 text-center">
