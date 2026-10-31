@@ -2,17 +2,17 @@ import { ProductItem } from "./product-item"
 import { products } from '../../mock/products'
 import { initialFilters } from "./sidebar"
 import { Button } from "../ui/button"
+import { PackageSearch } from "lucide-react"
 
 type Props = {
-    className?: string,
     filters: typeof initialFilters,
     onApply: (filters: typeof initialFilters) => void,
     setFilters: (filters: typeof initialFilters) => void
 }
 
-export function ProductList({ className, filters, onApply, setFilters }: Props) {
+export function ProductList({ filters, onApply, setFilters }: Props) {
 
-     const filtered = products.filter((item) => {
+    const filtered = products.filter((item) => {
         if (filters.category && item.category !== filters.category) return false
         if (filters.species && item.species !== filters.species) return false
         if (filters.weight && !item.weight.includes(Number(filters.weight))) return false
@@ -34,19 +34,33 @@ export function ProductList({ className, filters, onApply, setFilters }: Props) 
     }
     
     return (
-        <div className="flex justify-center w-full">
+        <div className="w-full flex flex-col gap-4">
+            <div className="flex justify-between items-center">
+                <p className="text-sm text-[var(--color-text-muted)]">
+                    Showing <span className="font-semibold text-[var(--color-text)]">{filtered.length}</span> {filtered.length === 1 ? 'product' : 'products'}
+                </p>
+            </div>
+
             {filtered.length === 0 ? (
-                <div className="flex flex-col gap-1 items-center justify-center text-center py-20 px-4">
-                    <h2 className="text-2xl font-semibold">
+                <div className="bg-white border border-[var(--color-border)] rounded-2xl flex flex-col gap-3 items-center justify-center text-center py-16 px-6 shadow-xs">
+                    <div className="size-14 rounded-2xl bg-[var(--color-surface)] flex items-center justify-center text-[var(--color-text-muted)]">
+                        <PackageSearch size={28} />
+                    </div>
+                    <h2 className="text-xl font-semibold text-[var(--color-text)]">
                         No products found
                     </h2>
-                    <p className="mt-2 text-gray-500">
-                        Try changing your filters.
+                    <p className="text-sm text-[var(--color-text-muted)] max-w-sm">
+                        No products match your selected filters. Try broadening your criteria.
                     </p>
-                    <Button onClick={() => resetFilters(initialFilters)} text="Reset filters" variant="secondary" />
+                    <Button 
+                        onClick={() => resetFilters(initialFilters)} 
+                        text="Reset filters" 
+                        variant="secondary" 
+                        className="mt-2 text-sm"
+                    />
                 </div>
             ) : (
-                <section className="grid grid-cols-2 w-full gap-2 md:grid-cols-3 md:gap-4 md:m-4 lg:grid-cols-4">
+                <section className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
                     {filtered.map((product) => (
                         <ProductItem
                             key={product.id}

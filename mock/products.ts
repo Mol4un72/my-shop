@@ -6,6 +6,7 @@ export interface Product {
     availability?: string;
     producer?: string;
     imageUrl: string;
+    images?: string[];
     category: 'cheese' | 'dairy';
     species: string;
     weight: number[];
@@ -20,6 +21,7 @@ export const products: Product[] = [
         producer: "Producer 1",
         availability: "In Stock",
         imageUrl: "/test.jpg",
+        images: ["/test.jpg", "/test-2.jpg", "/test-3.jpg"],
         category: 'cheese',
         species: 'hard cheese',
         weight: [100, 250, 1000],
@@ -32,6 +34,7 @@ export const products: Product[] = [
         producer: "Producer 2",
         availability: "In Stock",
         imageUrl: "/test.jpg",
+        images: ["/test.jpg", "/test-2.jpg"],
         category: 'cheese',
         species: 'soft cheese',
         weight: [100, 250, 1000],
@@ -44,6 +47,7 @@ export const products: Product[] = [
         producer: "Producer 3",
         availability: "In Stock",
         imageUrl: "/test.jpg",
+        images: ["/test.jpg", "/test-2.jpg", "/test-3.jpg"],
         category: 'cheese',
         species: 'soft cheese',
         weight: [100, 250, 1000],
@@ -56,6 +60,7 @@ export const products: Product[] = [
         producer: "Producer 4",
         availability: "In Stock",
         imageUrl: "/test.jpg",
+        images: ["/test.jpg"],
         category: 'dairy',
         species: 'milk',
         weight: [250, 500],
@@ -68,6 +73,7 @@ export const products: Product[] = [
         producer: "Producer 5",
         availability: "In Stock",
         imageUrl: "/test.jpg",
+        images: ["/test.jpg", "/test-2.jpg"],
         category: 'dairy',
         species: 'kefir',
         weight: [250, 500],

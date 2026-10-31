@@ -3,12 +3,15 @@
 :root {
   /* Основні */
   --color-cyan: #00D4FF;
+  --color-cyan-hover: #00BBE0;
   --color-blue: #1E5BFF;
+  --color-blue-hover: #154BD8;
   --color-navy: #0A2540;
 
   /* Фони */
-  --color-bg: #FFFFFF;
+  --color-bg: #F8FAFC;
   --color-surface: #F1F5F9;
+  --color-surface-hover: #E2E8F0;
   --color-cyan-light: #EAFAFF;
 
   /* Текст */
@@ -17,5 +20,48 @@
   --color-text-on-cyan: #062A4D;
 
   /* Рамки */
-  --color-border: #D5DCE6;
+  --color-border: #E2E8F0;
+  --color-border-hover: #CBD5E1;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Приємний тонкий скролбар */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #CBD5E1 transparent;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Модальні вікна <dialog> */
+dialog::backdrop {
+  background-color: rgba(10, 37, 64, 0.4);
+  backdrop-filter: blur(4px);
 }

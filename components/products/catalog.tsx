@@ -13,11 +13,9 @@ export function Catalog() {
     }
 
     return (
-        <main className="flex flex-col gap-1.5 p-3 md:flex-row md:p-0 md:gap-0">
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col gap-6">
             <Sidebar filters={filters} setFilters={setFilters} onApply={applyFilters} />
-            <div className="min-w-0 flex-1">
-                <ProductList filters={appliedFilters} setFilters={setFilters} onApply={applyFilters}/>
-            </div>
+            <ProductList filters={appliedFilters} setFilters={setFilters} onApply={applyFilters}/>
         </main>
     )
 }

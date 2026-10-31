@@ -53,7 +53,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }
 
   function updateQuantity(id: Product['id'], quantity: number) {
-    const item = cart.find(item => item.product.id === id)
     setCart(prev =>
       prev.map(item =>
         item.product.id === id

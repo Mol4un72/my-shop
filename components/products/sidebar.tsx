@@ -1,18 +1,18 @@
 "use client"
 
 import { useState } from "react"
-import { X } from 'lucide-react'
+import { SlidersHorizontal, RotateCcw, ChevronDown, ChevronUp } from 'lucide-react'
 import { Button } from "../ui/button"
 
 export const initialFilters = {
-        category: '',
-        species: '',
-        weight: '',
-        price: {
-            from: '',
-            to: '',
-        },
-    }
+    category: '',
+    species: '',
+    weight: '',
+    price: {
+        from: '',
+        to: '',
+    },
+}
     
 type Props = {
     filters: typeof initialFilters,
@@ -21,8 +21,7 @@ type Props = {
 }
 
 export function Sidebar({ filters, setFilters, onApply }: Props) {
-
-    const[open, setOpen] = useState(false)
+    const [isMobileOpen, setIsMobileOpen] = useState(false)
     
     function resetFilters() {
         setFilters(initialFilters)
@@ -31,159 +30,171 @@ export function Sidebar({ filters, setFilters, onApply }: Props) {
 
     const productTypes = {
       cheese: [
-        { value: 'hard cheese', label: 'hard cheese' },
-        { value: 'soft cheese', label: 'soft cheese' },
-        { value: 'brine-ripened cheese', label: 'brine-ripened cheese' },
+        { value: 'hard cheese', label: 'Hard cheese' },
+        { value: 'soft cheese', label: 'Soft cheese' },
+        { value: 'brine-ripened cheese', label: 'Brine-ripened cheese' },
       ],
       dairy: [
-        { value: 'milk', label: 'milk' },
-        { value: 'kefir', label: 'kefir' },
-        { value: 'ryazhenka', label: 'ryazhenka' },
+        { value: 'milk', label: 'Milk' },
+        { value: 'kefir', label: 'Kefir' },
+        { value: 'ryazhenka', label: 'Ryazhenka' },
       ],
     }
-    
-    return(
-        <>
-            <div className="flex justify-center">
-                <Button
-                    text="filters"
-                    className="md:hidden bg-white/0 text-2xl border rounded-lg h-10 px-10"
-                    onClick={() => {
-                        setOpen(true)
-                    }}
-                />
-            </div>
-            <aside className="z-0">
-                <div 
-                    className={`
-                        ${open ? "fixed inset-0 z-50" : "hidden"}
-                        bg-white p-6
-                        md:fixed md:block md:max-w-45 md:border-r md:border-[var(--color-border)] md:px-4 md:py-0
-                    `}
-                >
-                    <div className="flex justify-between text-3xl md:hidden">
-                        <button
-                            onClick={() => {
-                                resetFilters()
-                            }}
-                        >
-                            Reset all
-                        </button>
-                    </div>
-                        
-                    <div className="flex flex-col gap-3 h-screen w-full my-10 md:my-2">
-                        
-                        <div className="flex flex-row justify-between">
-                            <h2 className="text-4xl md:text-2xl">Filters</h2>
 
-                            <button
-                                onClick={() => {
-                                    setOpen(false)
-                                    onApply(filters)
-                                }}
-                                className="md:hidden"
-                            >
-                                <X size={32} strokeWidth={2.5} />
-                            </button>
-                        </div>
-                        
-                        <div className="flex flex-col text-2xl gap-4 md:text-xl">
-                            <div className="flex flex-col gap-1">
-                                <label>Category</label>
-                                <select 
-                                    className="border border-[var(--color-border)] text-[var(--color-text-muted)] rounded-lg md:text-sm"
-                                    value={filters.category}
-                                    onChange={(e) =>
-                                      setFilters({ ...filters, category: e.target.value, species: '' })
-                                    }
-                                >
-                                    <option value="" disabled>choose category</option>
-                                    <option value={'cheese'}>cheese</option>
-                                    <option value={'dairy'}>dairy</option>
-                                </select>
-                            </div>
-                                
-                            <div className="flex flex-col gap-1">
-                                <label>Species</label>
-                                <select 
-                                    className="border rounded-lg border-[var(--color-border)] text-[var(--color-text-muted)] md:text-sm"
-                                    value={filters.species}
-                                    onChange={(e) =>
-                                      setFilters({ ...filters, species: e.target.value })
-                                    }    
-                                >
-                                    <option value="" disabled>choose species</option>
-                                    {filters.category == 'cheese' && (
-                                        productTypes.cheese.map((type) => (
-                                            <option key={type.value} value={type.value}>{type.label}</option>
-                                        ))
-                                    )}
-                                    {filters.category == 'dairy' && (
-                                        productTypes.dairy.map((type) => (
-                                            <option key={type.value} value={type.value}>{type.label}</option>
-                                        ))
-                                    )}
-                                </select>
-                            </div>
-                                
-                            <div className="flex flex-col gap-1">
-                                <label>Weight</label>
-                                <select 
-                                    className="border rounded-lg border-[var(--color-border)] text-[var(--color-text-muted)] md:text-sm"
-                                    value={filters.weight}
-                                    onChange={(e) =>
-                                      setFilters({ ...filters, weight: e.target.value })
-                                    }
-                                >
-                                    <option value="" disabled>choose weight</option>
-                                    <option value='100'>100g</option>
-                                    <option value='250'>250g</option>
-                                    <option value='500'>500g</option>
-                                    <option value='1000'>1000g</option>
-                                </select>
-                            </div>
-                            <div className="flex flex-col gap-1">
-                                <label>Price</label>
-                                <div className="flex flex-row gap-3">
-                                    <input 
-                                        value={filters.price.from}
-                                        onChange={(e) => 
-                                            setFilters({...filters, price: {...filters.price, from: e.target.value}})
-                                        } 
-                                        placeholder="from" 
-                                        className="w-full md:max-h-6 text-xl border rounded-md p-2 h-8 border-[var(--color-border)] md:text-sm" 
-                                    />
-                                    <input 
-                                        value={filters.price.to}
-                                        onChange={(e) => 
-                                            setFilters({...filters, price: {...filters.price, to: e.target.value}})
-                                        } 
-                                        placeholder="to" 
-                                        className="w-full md:max-h-6 text-xl border rounded-md p-2 h-8 border-[var(--color-border)] md:text-sm" 
-                                    />
-                                </div>
-                            </div>
-                            <div className="flex flex-col gap-2">
-                                <Button 
-                                    text="aply" 
-                                    variant="secondary" 
-                                    className="hidden md:block md:text-sm" 
-                                    onClick={() => onApply(filters)}
-                                />
-                                <Button
-                                    text="reset all"
-                                    variant="secondary"
-                                    className="text-md md:text-sm md:block md:justify-center md:h-fit"
-                                    onClick={() => {
-                                        resetFilters()
-                                    }}
-                                />
-                            </div>
-                        </div>
+    const hasActiveFilters = Boolean(
+        filters.category || filters.species || filters.weight || filters.price.from || filters.price.to
+    )
+
+    function handleCategoryChange(category: string) {
+        const updated = { ...filters, category, species: '' }
+        setFilters(updated)
+        onApply(updated)
+    }
+    
+    return (
+        <section className="w-full bg-white border border-[var(--color-border)] rounded-2xl p-3.5 sm:p-4 shadow-xs flex flex-col gap-3">
+            {/* Top row: Category segmented pills + Reset button */}
+            <div className="flex flex-wrap items-center justify-between gap-2.5">
+                <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
+                    <button
+                        type="button"
+                        onClick={() => handleCategoryChange('')}
+                        className={`cursor-pointer px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all shrink-0 ${
+                            filters.category === ''
+                                ? 'bg-[var(--color-blue)] text-white shadow-xs'
+                                : 'bg-[var(--color-surface)] text-[var(--color-text)] hover:bg-[var(--color-border)]'
+                        }`}
+                    >
+                        All products
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => handleCategoryChange('cheese')}
+                        className={`cursor-pointer px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all shrink-0 ${
+                            filters.category === 'cheese'
+                                ? 'bg-[var(--color-blue)] text-white shadow-xs'
+                                : 'bg-[var(--color-surface)] text-[var(--color-text)] hover:bg-[var(--color-border)]'
+                        }`}
+                    >
+                        Cheese
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => handleCategoryChange('dairy')}
+                        className={`cursor-pointer px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all shrink-0 ${
+                            filters.category === 'dairy'
+                                ? 'bg-[var(--color-blue)] text-white shadow-xs'
+                                : 'bg-[var(--color-surface)] text-[var(--color-text)] hover:bg-[var(--color-border)]'
+                        }`}
+                    >
+                        Dairy
+                    </button>
+                </div>
+
+                <div className="flex items-center gap-2 ml-auto">
+                    {/* Mobile toggle for sub-filters */}
+                    <button
+                        type="button"
+                        onClick={() => setIsMobileOpen(!isMobileOpen)}
+                        className="cursor-pointer md:hidden inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)]"
+                    >
+                        <SlidersHorizontal size={14} className="text-[var(--color-blue)]" />
+                        <span>Filters</span>
+                        {isMobileOpen ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                    </button>
+
+                    {/* Reset button */}
+                    {hasActiveFilters && (
+                        <button
+                            type="button"
+                            onClick={resetFilters}
+                            className="cursor-pointer inline-flex items-center gap-1 text-xs font-medium text-[var(--color-text-muted)] hover:text-red-500 transition-colors px-2 py-1"
+                            title="Reset all filters"
+                        >
+                            <RotateCcw size={12} />
+                            <span>Reset</span>
+                        </button>
+                    )}
+                </div>
+            </div>
+
+            {/* Bottom row: Inline dropdowns and price inputs (always visible on desktop, collapsible on mobile) */}
+            <div className={`pt-2.5 border-t border-[var(--color-border)] ${isMobileOpen ? 'flex' : 'hidden md:flex'} flex-wrap items-center gap-2.5 text-xs sm:text-sm`}>
+                {/* Species dropdown */}
+                <div className="flex items-center gap-1.5 shrink-0">
+                    <span className="text-[var(--color-text-muted)] font-medium hidden lg:inline">Species:</span>
+                    <select
+                        className="cursor-pointer border border-[var(--color-border)] rounded-xl px-2.5 py-1.5 bg-white text-[var(--color-text)] text-xs sm:text-sm outline-none focus:border-[var(--color-blue)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        value={filters.species}
+                        disabled={!filters.category}
+                        onChange={(e) => setFilters({ ...filters, species: e.target.value })}
+                    >
+                        <option value="">{filters.category ? 'All species' : 'Species (choose category)'}</option>
+                        {filters.category === 'cheese' && (
+                            productTypes.cheese.map((type) => (
+                                <option key={type.value} value={type.value}>{type.label}</option>
+                            ))
+                        )}
+                        {filters.category === 'dairy' && (
+                            productTypes.dairy.map((type) => (
+                                <option key={type.value} value={type.value}>{type.label}</option>
+                            ))
+                        )}
+                    </select>
+                </div>
+
+                {/* Weight dropdown */}
+                <div className="flex items-center gap-1.5 shrink-0">
+                    <span className="text-[var(--color-text-muted)] font-medium hidden lg:inline">Weight:</span>
+                    <select
+                        className="cursor-pointer border border-[var(--color-border)] rounded-xl px-2.5 py-1.5 bg-white text-[var(--color-text)] text-xs sm:text-sm outline-none focus:border-[var(--color-blue)] transition-colors"
+                        value={filters.weight}
+                        onChange={(e) => setFilters({ ...filters, weight: e.target.value })}
+                    >
+                        <option value="">All weights</option>
+                        <option value="100">100g</option>
+                        <option value="250">250g</option>
+                        <option value="500">500g</option>
+                        <option value="1000">1000g</option>
+                    </select>
+                </div>
+
+                {/* Price range inputs */}
+                <div className="flex items-center gap-1.5 shrink-0">
+                    <span className="text-[var(--color-text-muted)] font-medium hidden lg:inline">Price:</span>
+                    <div className="flex items-center gap-1">
+                        <input
+                            type="number"
+                            min="0"
+                            placeholder="From $"
+                            value={filters.price.from}
+                            onChange={(e) => setFilters({ ...filters, price: { ...filters.price, from: e.target.value } })}
+                            className="w-18 sm:w-20 border border-[var(--color-border)] rounded-xl px-2 py-1.5 text-xs sm:text-sm outline-none focus:border-[var(--color-blue)] transition-colors"
+                        />
+                        <span className="text-[var(--color-text-muted)]">-</span>
+                        <input
+                            type="number"
+                            min="0"
+                            placeholder="To $"
+                            value={filters.price.to}
+                            onChange={(e) => setFilters({ ...filters, price: { ...filters.price, to: e.target.value } })}
+                            className="w-18 sm:w-20 border border-[var(--color-border)] rounded-xl px-2 py-1.5 text-xs sm:text-sm outline-none focus:border-[var(--color-blue)] transition-colors"
+                        />
                     </div>
                 </div>
-                <div className="md:w-45" />
-            </aside>
-        </>
+
+                {/* Apply button */}
+                <div className="ml-auto flex items-center gap-2 shrink-0">
+                    <Button
+                        text="Apply"
+                        className="h-8 px-4 text-xs font-semibold"
+                        onClick={() => {
+                            onApply(filters)
+                            setIsMobileOpen(false)
+                        }}
+                    />
+                </div>
+            </div>
+        </section>
     )
 }

@@ -1,47 +1,51 @@
-
 'use client'
 
 import { OrderItem } from '@/components/order/order-item'
 import { useOrder } from '@/context/order-context'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { ClipboardList, ArrowRight } from 'lucide-react'
 
 export default function OrdersPage() {
     const { orderList } = useOrder()
 
     return (
-        <section className="flex flex-col gap-4 p-4 md:max-w-130 md:mx-auto">
-            <h2 className="text-3xl flex justify-center">My orders</h2>
-
-            <div className="border border-[var(--color-border)] rounded-lg p-2 h-[660px] overflow-y-auto md:h-[500px]">
-                {orderList.length === 0 ? (
-                    <div className="min-h-[644px] md:min-h-[484px] flex flex-col items-center justify-center gap-1 px-4">
-                        <h2 className="text-2xl font-semibold">
-                            No orders found
-                        </h2>
-
-                        <p className="mt-2 text-gray-500 text-center">
-                            Go to cart and make your order.
-                        </p>
-
-                        <Link href="/cart">
-                            <Button
-                                text="to cart page"
-                                className="px-4 max-w-fit"
-                                variant="secondary"
-                            />
-                        </Link>
-                    </div>
-                ) : (
-                    <div className="flex flex-col gap-3">
-                        {orderList.map((order) => (
-                            <Link key={order.id} href={`/orders/${order.id}`}>
-                                <OrderItem order={order} />
-                            </Link>
-                        ))}
-                    </div>
-                )}
+        <main className="max-w-2xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col gap-6">
+            <div className="flex items-center justify-between pb-4 border-b border-[var(--color-border)]">
+                <h1 className="text-2xl sm:text-3xl font-bold text-[var(--color-text)]">My Orders</h1>
+                <span className="text-sm font-medium text-[var(--color-text-muted)] bg-[var(--color-surface)] px-3 py-1 rounded-full">
+                    {orderList.length} {orderList.length === 1 ? 'order' : 'orders'}
+                </span>
             </div>
-        </section>
+
+            {orderList.length === 0 ? (
+                <div className="bg-white border border-[var(--color-border)] rounded-3xl flex flex-col items-center justify-center gap-3 p-12 text-center shadow-xs">
+                    <div className="size-16 rounded-2xl bg-[var(--color-surface)] flex items-center justify-center text-[var(--color-text-muted)]">
+                        <ClipboardList size={32} />
+                    </div>
+                    <h2 className="text-2xl font-bold text-[var(--color-text)]">
+                        No orders yet
+                    </h2>
+                    <p className="text-sm text-[var(--color-text-muted)] max-w-sm">
+                        You haven&apos;t placed any orders yet. Add items to your cart to make your first order.
+                    </p>
+                    <Link href="/products" className="mt-3">
+                        <Button
+                            text="Explore catalog"
+                            icon={<ArrowRight size={16} />}
+                            className="px-6 h-11 text-base font-semibold"
+                        />
+                    </Link>
+                </div>
+            ) : (
+                <div className="flex flex-col gap-3">
+                    {orderList.map((order) => (
+                        <Link key={order.id} href={`/orders/${order.id}`}>
+                            <OrderItem order={order} />
+                        </Link>
+                    ))}
+                </div>
+            )}
+        </main>
     )
 }
