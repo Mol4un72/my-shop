@@ -91,7 +91,7 @@ export function Sidebar({ filters, setFilters, onApply }: Props) {
                             <div className="flex flex-col gap-1">
                                 <label>Category</label>
                                 <select 
-                                    className="border border-[var(--color-border)] rounded-lg md:text-sm"
+                                    className="border border-[var(--color-border)] text-[var(--color-text-muted)] rounded-lg md:text-sm"
                                     value={filters.category}
                                     onChange={(e) =>
                                       setFilters({ ...filters, category: e.target.value, species: '' })
@@ -106,13 +106,13 @@ export function Sidebar({ filters, setFilters, onApply }: Props) {
                             <div className="flex flex-col gap-1">
                                 <label>Species</label>
                                 <select 
-                                    className="border rounded-lg border-[var(--color-border)] md:text-sm"
+                                    className="border rounded-lg border-[var(--color-border)] text-[var(--color-text-muted)] md:text-sm"
                                     value={filters.species}
                                     onChange={(e) =>
                                       setFilters({ ...filters, species: e.target.value })
                                     }    
                                 >
-                                    <option value="" disabled>choose category</option>
+                                    <option value="" disabled>choose species</option>
                                     {filters.category == 'cheese' && (
                                         productTypes.cheese.map((type) => (
                                             <option key={type.value} value={type.value}>{type.label}</option>
@@ -129,17 +129,17 @@ export function Sidebar({ filters, setFilters, onApply }: Props) {
                             <div className="flex flex-col gap-1">
                                 <label>Weight</label>
                                 <select 
-                                    className="border rounded-lg border-[var(--color-border)] md:text-sm"
+                                    className="border rounded-lg border-[var(--color-border)] text-[var(--color-text-muted)] md:text-sm"
                                     value={filters.weight}
                                     onChange={(e) =>
                                       setFilters({ ...filters, weight: e.target.value })
                                     }
                                 >
-                                    <option value="" disabled>choose category</option>
-                                    <option>100g</option>
-                                    <option>250g</option>
-                                    <option>500g</option>
-                                    <option>1000g</option>
+                                    <option value="" disabled>choose weight</option>
+                                    <option value='100'>100g</option>
+                                    <option value='250'>250g</option>
+                                    <option value='500'>500g</option>
+                                    <option value='1000'>1000g</option>
                                 </select>
                             </div>
                             <div className="flex flex-col gap-1">

@@ -1,3 +1,6 @@
+'use client'
+
+import { useState } from 'react'
 import { Product } from '@/mock/products'  
 import { ShoppingCart } from 'lucide-react'
 import Image from 'next/image'
@@ -5,9 +8,24 @@ import { Button } from '@/components/ui/button'
 import { useCart } from '@/context/cart-context'
 import Link from 'next/link'
 
+export type ReadyToBuyProduct = {
+    product: Product
+    quantity: number
+    selectedWeight: number
+    totalPrice: number
+}
+
 export function ProductItem({ product }: {product: Product}) {
 
     const { addToCart } = useCart()
+    const[readyProduct, setReadyProduct] = useState<ReadyToBuyProduct>({
+        product: product,
+        quantity: 1,
+        selectedWeight: product.weight[0],
+        totalPrice: product.category === 'dairy'
+            ? (product.price as number[])[0]
+            : (product.price as number)
+    })
     
     return(
         <>
@@ -23,8 +41,16 @@ export function ProductItem({ product }: {product: Product}) {
                         className='rounded-lg min-h-16 aspect-square md:min-h-30 w-full md:max-h-45 lg:max-h-55'
                     />
                     <div>
-                        <p className='text-lg md:text-xl lg:text-2xl'>{product.name}</p>
-                        <p className='text-[var(--color-text-muted)]'>{product.price}</p>
+                        <h3 className='text-lg md:text-xl lg:text-2xl'>{product.name}</h3>
+                        <div className="flex flex-row">
+                            <p className='text-[var(--color-text-muted)]'>{product.weight.join(' / ')} g</p>
+                        </div>
+                        <p className="text-[var(--color-blue)]">
+                            {product.category === 'dairy'
+                                ? (product.price as number[])[0]
+                                : product.price as number
+                            }$
+                        </p>
                     </div>
                 </Link>
                 <div className='flex flex-row gap-1'>
@@ -32,7 +58,7 @@ export function ProductItem({ product }: {product: Product}) {
                         text="add to cart"
                         className='w-full min-h-8 md:min-h-8'
                         icon={<ShoppingCart size={15} className='mt-1'/>}
-                        onClick={() => addToCart(product)}
+                        onClick={() => addToCart(readyProduct)}
                     />
                 </div>
             </article>

@@ -12,12 +12,19 @@ type Props = {
 
 export function ProductList({ className, filters, onApply, setFilters }: Props) {
 
-     const filtered = products.filter((product) => {
-        if (filters.category && product.category !== filters.category) return false
-        if (filters.species && product.species !== filters.species) return false
-        if (filters.weight && product.weight !== filters.weight) return false
-        if (filters.price.from && product.price < Number(filters.price.from)) return false
-        if (filters.price.to && product.price > Number(filters.price.to)) return false
+     const filtered = products.filter((item) => {
+        if (filters.category && item.category !== filters.category) return false
+        if (filters.species && item.species !== filters.species) return false
+        if (filters.weight && !item.weight.includes(Number(filters.weight))) return false
+
+        const prices = Array.isArray(item.price) ? item.price : [item.price]
+
+        const minPrice = Math.min(...prices)
+        const maxPrice = Math.max(...prices)
+
+        if (filters.price.from && maxPrice < Number(filters.price.from)) return false
+        if (filters.price.to && minPrice > Number(filters.price.to)) return false
+
         return true
     })
 
