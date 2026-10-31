@@ -7,6 +7,8 @@ import { useCart } from '@/context/cart-context'
 type OrderItem = {
     product: Product
     quantity: number
+    selectedWeight: number
+    totalPrice: number
 }
 
 export type Order = {
@@ -30,15 +32,15 @@ const OrderContext = createContext<OrderContextType | null>(null)
 export function OrderProvider({children}: {children: ReactNode}) {
     const[orderList, setOrder] = useState<OrderList>([])
     const { cart, clearCart } = useCart()
-    
+    const total = cart.reduce((sum, item) => {return sum += item.totalPrice * item.quantity}, 0).toFixed(2)
     
     function createOrder() {
         if (cart.length == 0) return
         const newOrder: Order = {
             id: crypto.randomUUID().slice(0,8),
             items: cart,
-            total: cart.reduce((sum, item) => sum + item.product.price * item.quantity, 0),
-            date: new Date().toISOString(),
+            total: Number(total),
+            date: new Date().toLocaleDateString('uk-UA'),
             delivered: false,
         }
         setOrder(prev => [...prev, newOrder])
