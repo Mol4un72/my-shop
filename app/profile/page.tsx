@@ -2,10 +2,7 @@
 
 import { useRef, useState } from 'react'
 import { users } from '@/mock/user'
-import { OrderItem } from '@/components/profile/order-item'
-import { useOrder } from '@/context/order-context'
 import { Button } from '@/components/ui/button'
-import Link from 'next/link'
 import { X } from 'lucide-react'
 import { Avatar } from '@/components/ui/avatar'
 import { pickUpAdress } from '@/mock/adress'
@@ -14,7 +11,6 @@ export default function ProfilePage() {
 
     const profileDialog = useRef<HTMLDialogElement>(null)
     const pickUpDialog = useRef<HTMLDialogElement>(null)
-    const { orderList } = useOrder()
     const[adressState, setAdressState] = useState(pickUpAdress[0])
     
     return(
@@ -28,29 +24,6 @@ export default function ProfilePage() {
                         <h3>{users[0].email}</h3>
                     </div>
                     <button onClick={() => profileDialog.current?.showModal()} className="absolute right-2.5 bottom-2.5 text-[var(--color-blue)]">Settings</button>
-                </div>
-                <div className="flex flex-row justify-between">
-                    <h2 className="text-lg">My orders</h2>
-                </div>
-                <div className='border border-[var(--color-border)] rounded-lg p-2 h-[300px] overflow-y-auto'>
-                    <div className='flex flex-col gap-3'>
-                        {orderList.length === 0 ? (
-                            <div className="flex flex-col gap-1 items-center justify-center text-center py-20 px-4">
-                                <h2 className="text-2xl font-semibold">
-                                    No orders found
-                                </h2>
-                                <p className="mt-2 text-gray-500">
-                                    Go to cart and make your order.
-                                </p>
-                                <Link href={`/cart`}>
-                                    <Button text="to cart page" className='px-4 max-w-fit' variant="secondary" />
-                                </Link>
-                            </div>
-                        ) : (
-                            orderList.map((order) => (
-                                <OrderItem key={order.id} order={order}/>
-                        )))}
-                    </div>
                 </div>
                 <div>
                     <h2 className="text-lg">Main pickup adress</h2>
